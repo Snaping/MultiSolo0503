@@ -22,6 +22,7 @@ target/
 *.exe
 bin/
 obj/
+.vs
 
 # 日志
 *.log
