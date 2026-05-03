@@ -1,0 +1,26 @@
+{
+  "name": null,
+  "preferences": {},
+  "conversationHistory": [
+    {
+      "timestamp": 1777812821150,
+      "message": "你好"
+    },
+    {
+      "timestamp": 1777813278574,
+      "message": "你用的什么模型？"
+    },
+    {
+      "timestamp": 1777814293896,
+      "message": "你是谁？"
+    },
+    {
+      "timestamp": 1777814308049,
+      "message": "你用的什么模型？"
+    },
+    {
+      "timestamp": 1777814329935,
+      "message": "我今天很高兴"
+    }
+  ]
+}
