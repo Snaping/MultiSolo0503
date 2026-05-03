@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP协议动画演示</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TCP通信协议工作原理动画演示</h1>
+            <p>理解三次握手、数据传输和四次挥手</p>
+        </header>
+
+        <div class="main-content">
+            <div class="controls">
+                <button id="autoPlayBtn" class="btn btn-primary">自动播放</button>
+                <button id="stepBtn" class="btn">下一步</button>
+                <button id="resetBtn" class="btn btn-reset">重置</button>
+                <div class="speed-control">
+                    <label>速度:</label>
+                    <input type="range" id="speedSlider" min="0.5" max="3" step="0.5" value="1">
+                    <span id="speedValue">1x</span>
+                </div>
+            </div>
+
+            <div class="steps-nav">
+                <div class="step-item active" data-step="1">
+                    <span class="step-num">1</span>
+                    <span class="step-title">三次握手</span>
+                </div>
+                <div class="step-item" data-step="2">
+                    <span class="step-num">2</span>
+                    <span class="step-title">数据传输</span>
+                </div>
+                <div class="step-item" data-step="3">
+                    <span class="step-num">3</span>
+                    <span class="step-title">四次挥手</span>
+                </div>
+            </div>
+
+            <div class="animation-area">
+                <div class="network-wrapper">
+                    <div class="client" id="client">
+                        <div class="machine-title">客户端</div>
+                        <div class="state-badge" id="clientState">CLOSED</div>
+                        <div class="packet-queue" id="clientQueue"></div>
+                    </div>
+                    
+                    <div class="network">
+                        <div class="packets-container" id="packetsContainer"></div>
+                        <div class="step-info" id="stepInfo">
+                            <div class="step-description" id="stepDescription">点击开始按钮，开始TCP连接建立过程</div>
+                        </div>
+                    </div>
+                    
+                    <div class="server" id="server">
+                        <div class="machine-title">服务器</div>
+                        <div class="state-badge" id="serverState">LISTEN</div>
+                        <div class="packet-queue" id="serverQueue"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <h3>当前步骤说明</h3>
+                <div class="explanation-content" id="explanationContent">
+                    <p>TCP（传输控制协议）是一种面向连接的、可靠的传输层协议。</p>
+                    <p>TCP通信分为三个主要阶段：连接建立（三次握手）、数据传输、连接释放（四次挥手）。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
