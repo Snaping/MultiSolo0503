@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP服务端模拟</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TCP服务端模拟</h1>
+            <p>服务端视角下的TCP通信</p>
+        </header>
+
+        <div class="main-content">
+            <nav class="main-nav">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-title">总览</div>
+                    <div class="nav-desc">完整TCP通信流程</div>
+                </a>
+                <a href="client.html" class="nav-item">
+                    <div class="nav-icon">💻</div>
+                    <div class="nav-title">客户端</div>
+                    <div class="nav-desc">客户端视角</div>
+                </a>
+                <a href="server.html" class="nav-item active">
+                    <div class="nav-icon">🖥️</div>
+                    <div class="nav-title">服务端</div>
+                    <div class="nav-desc">服务端视角</div>
+                </a>
+            </nav>
+
+            <div class="server-section">
+                <div class="machine-panel">
+                    <div class="panel-header">
+                    <div class="machine-icon-large">🖥️</div>
+                    <div>
+                    <h2>服务端</h2>
+                    <p>10.0.0.1:8080</p>
+                    </div>
+                    <div class="status-badge" id="serverStatus">LISTEN</div>
+                </div>
+
+                <div class="server-controls">
+                    <button id="listenBtn" class="btn btn-primary" disabled>开始监听</button>
+                    <button id="sendDataBtn" class="btn" disabled>发送数据</button>
+                    <button id="closeBtn" class="btn btn-danger" disabled>关闭连接</button>
+                </div>
+
+                <div class="input-area">
+                    <label>要发送的数据:</label>
+                    <textarea id="dataInput" placeholder="输入要发送的消息..." disabled>Hello, Client!</textarea>
+                </div>
+
+                <div class="log-panel">
+                    <h3>服务端状态转换</h3>
+                    <div class="state-transition">
+                        <div class="state-dot" data-state="LISTEN">
+                            <span class="dot active"></span>
+                            <span>LISTEN</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="state-dot" data-state="SYN_RCVD">
+                            <span class="dot"></span>
+                            <span>SYN_RCVD</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="state-dot" data-state="ESTABLISHED">
+                            <span class="dot"></span>
+                            <span>ESTABLISHED</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="state-dot" data-state="CLOSE_WAIT">
+                            <span class="dot"></span>
+                            <span>CLOSE_WAIT</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="state-dot" data-state="LAST_ACK">
+                            <span class="dot"></span>
+                            <span>LAST_ACK</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="state-dot" data-state="CLOSED">
+                            <span class="dot"></span>
+                            <span>CLOSED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="log-panel">
+                    <h3>报文收发记录</h3>
+                    <div class="packet-log" id="packetLog">
+                        <div class="log-empty">等待连接请求...</div>
+                    </div>
+                </div>
+
+                <div class="log-panel">
+                    <h3>详细日志</h3>
+                    <div class="detail-log" id="detailLog">
+                        <div class="log-entry">[系统] 服务端已启动，正在监听 8080 端口...</div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="server.js"></script>
+</body>
+</html>

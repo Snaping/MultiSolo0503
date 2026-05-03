@@ -13,24 +13,24 @@ class TCPAnimation {
                     clientState: 'SYN_SENT',
                     serverState: 'LISTEN',
                     description: '客户端向服务器发送SYN包，请求建立连接',
-                    explanation: `<p><strong>第一次握手：</strong></p><p>客户端（Client）发送一个SYN（同步）报文段给服务器（Server），请求建立连接。</p><p>SYN标志位置1，客户端进入SYN_SENT状态，等待服务器确认。</p>`,
-                    packet: { type: 'syn', content: 'SYN', direction: 'toServer' }
+                    explanation: `<p><strong>第一次握手</strong></p><p>客户端（192.168.1.100:54321）向服务器发送SYN报文，同步序号设为随机值x。</p><p>客户端进入 SYN_SENT 状态，等待服务器确认。</p>`,
+                    packet: { type: 'syn', content: 'SYN seq=x', direction: 'toServer' }
                 },
                 {
                     name: 'SYN+ACK响应',
                     clientState: 'SYN_SENT',
                     serverState: 'SYN_RCVD',
                     description: '服务器收到SYN，回复SYN+ACK包',
-                    explanation: `<p><strong>第二次握手：</strong></p><p>服务器收到SYN报文段后，必须确认客户的SYN，同时自己也发送一个SYN报文段。</p><p>SYN和ACK标志位都置1，服务器进入SYN_RCVD状态。</p>`,
-                    packet: { type: 'ack', content: 'SYN+ACK', direction: 'toClient' }
+                    explanation: `<p><strong>第二次握手</strong></p><p>服务器收到SYN后，确认序号设为x+1，同时发送自己的SYN，序号设为y。</p><p>服务器进入 SYN_RCVD 状态。</p>`,
+                    packet: { type: 'ack', content: 'SYN+ACK seq=y ack=x+1', direction: 'toClient' }
                 },
                 {
                     name: 'ACK确认',
                     clientState: 'ESTABLISHED',
                     serverState: 'ESTABLISHED',
                     description: '客户端收到SYN+ACK，发送ACK确认，连接建立',
-                    explanation: `<p><strong>第三次握手：</strong></p><p>客户端收到服务器的SYN+ACK报文段后，向服务器发送确认报文段（ACK）。</p><p>ACK标志位置1，客户端和服务器都进入ESTABLISHED状态，TCP连接建立完成！</p>`,
-                    packet: { type: 'ack', content: 'ACK', direction: 'toServer' }
+                    explanation: `<p><strong>第三次握手</strong></p><p>客户端收到SYN+ACK后，确认序号设为y+1，发送ACK确认。</p><p>双方进入 ESTABLISHED 状态，TCP连接建立完成！</p>`,
+                    packet: { type: 'ack', content: 'ACK ack=y+1', direction: 'toServer' }
                 }
             ],
             2: [
@@ -39,24 +39,24 @@ class TCPAnimation {
                     clientState: 'ESTABLISHED',
                     serverState: 'ESTABLISHED',
                     description: '客户端向服务器发送数据',
-                    explanation: `<p><strong>数据传输阶段：</strong></p><p>连接建立后，双方可以开始传输数据。</p><p>TCP会对每个数据包进行编号和确认，确保数据可靠传输。</p>`,
-                    packet: { type: 'data', content: 'DATA', direction: 'toServer' }
+                    explanation: `<p><strong>数据传输</strong></p><p>客户端发送数据报文，包含seq序号和实际数据。</p><p>TCP确保数据按序到达，通过确认机制实现可靠性。</p>`,
+                    packet: { type: 'data', content: 'DATA seq=z len=50', direction: 'toServer' }
                 },
                 {
                     name: '确认接收',
                     clientState: 'ESTABLISHED',
                     serverState: 'ESTABLISHED',
                     description: '服务器确认收到数据',
-                    explanation: `<p><strong>确认机制：</strong></p><p>接收方收到数据后，会发送ACK确认报文。</p><p>发送方如果在超时前未收到确认，会重传数据。</p>`,
-                    packet: { type: 'ack', content: 'ACK', direction: 'toClient' }
+                    explanation: `<p><strong>ACK确认</strong></p><p>服务器收到数据后，发送ACK，ack=z+50表示已收到该数据。</p><p>如果超时未收到确认，发送方会重传数据。</p>`,
+                    packet: { type: 'ack', content: 'ACK ack=z+50', direction: 'toClient' }
                 },
                 {
                     name: '双向传输',
                     clientState: 'ESTABLISHED',
                     serverState: 'ESTABLISHED',
-                    description: '服务器也可以向客户端发送数据',
-                    explanation: `<p><strong>双向通信：</strong></p><p>TCP是全双工协议，双方可以同时发送和接收数据。</p>`,
-                    packet: { type: 'data', content: 'DATA', direction: 'toClient' }
+                    description: '服务器向客户端发送数据',
+                    explanation: `<p><strong>双向通信</strong></p><p>TCP是全双工协议，服务器也可以主动向客户端发送数据。</p><p>双方可以同时进行收发操作。</p>`,
+                    packet: { type: 'data', content: 'DATA seq=m len=30', direction: 'toClient' }
                 }
             ],
             3: [
@@ -65,32 +65,32 @@ class TCPAnimation {
                     clientState: 'FIN_WAIT_1',
                     serverState: 'ESTABLISHED',
                     description: '客户端发送FIN包请求关闭连接',
-                    explanation: `<p><strong>第一次挥手：</strong></p><p>客户端发送FIN（结束）报文段，请求关闭连接。</p><p>客户端进入FIN_WAIT_1状态。</p>`,
-                    packet: { type: 'fin', content: 'FIN', direction: 'toServer' }
+                    explanation: `<p><strong>第一次挥手</strong></p><p>客户端发送FIN报文，表示数据发送完毕，请求关闭连接。</p><p>客户端进入 FIN_WAIT_1 状态。</p>`,
+                    packet: { type: 'fin', content: 'FIN seq=p', direction: 'toServer' }
                 },
                 {
                     name: 'ACK确认',
                     clientState: 'FIN_WAIT_2',
                     serverState: 'CLOSE_WAIT',
                     description: '服务器确认收到FIN',
-                    explanation: `<p><strong>第二次挥手：</strong></p><p>服务器收到FIN后，发送ACK确认。</p><p>服务器进入CLOSE_WAIT状态，客户端进入FIN_WAIT_2状态。</p>`,
-                    packet: { type: 'ack', content: 'ACK', direction: 'toClient' }
+                    explanation: `<p><strong>第二次挥手</strong></p><p>服务器收到FIN，发送ACK确认，ack=p+1。</p><p>服务器进入 CLOSE_WAIT，客户端进入 FIN_WAIT_2 状态。</p>`,
+                    packet: { type: 'ack', content: 'ACK ack=p+1', direction: 'toClient' }
                 },
                 {
                     name: 'FIN关闭请求',
                     clientState: 'FIN_WAIT_2',
                     serverState: 'LAST_ACK',
                     description: '服务器发送FIN请求关闭',
-                    explanation: `<p><strong>第三次挥手：</strong></p><p>服务器发送FIN报文段，请求关闭连接。</p><p>服务器进入LAST_ACK状态。</p>`,
-                    packet: { type: 'fin', content: 'FIN', direction: 'toClient' }
+                    explanation: `<p><strong>第三次挥手</strong></p><p>服务器处理完数据后，发送FIN，请求关闭自己这端的连接。</p><p>服务器进入 LAST_ACK 状态。</p>`,
+                    packet: { type: 'fin', content: 'FIN seq=q', direction: 'toClient' }
                 },
                 {
                     name: 'ACK最终确认',
                     clientState: 'TIME_WAIT',
                     serverState: 'CLOSED',
                     description: '客户端确认，连接完全关闭',
-                    explanation: `<p><strong>第四次挥手：</strong></p><p>客户端收到FIN后，发送ACK确认。</p><p>客户端进入TIME_WAIT状态，等待2MSL后完全关闭，服务器收到ACK后立即关闭。</p>`,
-                    packet: { type: 'ack', content: 'ACK', direction: 'toServer' }
+                    explanation: `<p><strong>第四次挥手</strong></p><p>客户端收到FIN，发送ACK确认，ack=q+1。</p><p>客户端进入 TIME_WAIT，等待2MSL后完全关闭，服务器收到ACK后立即关闭。</p>`,
+                    packet: { type: 'ack', content: 'ACK ack=q+1', direction: 'toServer' }
                 }
             ]
         };
@@ -109,8 +109,9 @@ class TCPAnimation {
         this.stepDescription = document.getElementById('stepDescription');
         this.explanationContent = document.getElementById('explanationContent');
         this.packetsContainer = document.getElementById('packetsContainer');
-        this.clientQueue = document.getElementById('clientQueue');
-        this.serverQueue = document.getElementById('serverQueue');
+        this.clientHistory = document.getElementById('clientHistory');
+        this.serverHistory = document.getElementById('serverHistory');
+        this.dataFlow = document.getElementById('dataFlow');
         
         this.autoPlayBtn.addEventListener('click', () => this.toggleAutoPlay());
         this.stepBtn.addEventListener('click', () => this.nextStep());
@@ -191,6 +192,7 @@ class TCPAnimation {
         this.updateStates(stepData);
         this.showPacket(stepData.packet);
         this.updateExplanation(stepData);
+        this.addToHistory(stepData);
     }
 
     updateStates(stepData) {
@@ -205,6 +207,8 @@ class TCPAnimation {
 
     showPacket(packetData) {
         this.packetsContainer.innerHTML = '';
+        this.dataFlow.classList.add('active');
+        
         const packet = document.createElement('div');
         packet.className = `packet ${packetData.type} appear`;
         packet.textContent = packetData.content;
@@ -226,9 +230,39 @@ class TCPAnimation {
             this.packetsContainer.appendChild(packet);
             
             setTimeout(() => {
-                packet.classList.add('moving-to-server');
-                packet.style.animationDirection = 'reverse';
+                packet.classList.add('moving-to-client');
             }, 50);
+        }
+        
+        setTimeout(() => {
+            this.dataFlow.classList.remove('active');
+        }, 1500 / this.speed);
+    }
+
+    addToHistory(stepData) {
+        const packet = stepData.packet;
+        const time = new Date().toLocaleTimeString();
+        
+        if (packet.direction === 'toServer') {
+            const clientItem = document.createElement('div');
+            clientItem.className = 'history-item';
+            clientItem.textContent = `[${time}] 发送 ${packet.content}`;
+            this.clientHistory.appendChild(clientItem);
+            
+            const serverItem = document.createElement('div');
+            serverItem.className = 'history-item';
+            serverItem.textContent = `[${time}] 收到 ${packet.content}`;
+            this.serverHistory.appendChild(serverItem);
+        } else {
+            const serverItem = document.createElement('div');
+            serverItem.className = 'history-item';
+            serverItem.textContent = `[${time}] 发送 ${packet.content}`;
+            this.serverHistory.appendChild(serverItem);
+            
+            const clientItem = document.createElement('div');
+            clientItem.className = 'history-item';
+            clientItem.textContent = `[${time}] 收到 ${packet.content}`;
+            this.clientHistory.appendChild(clientItem);
         }
     }
 
@@ -237,16 +271,42 @@ class TCPAnimation {
         this.currentStep = 0;
         this.currentPhase = 1;
         this.packetsContainer.innerHTML = '';
+        this.clientHistory.innerHTML = '<div class="history-title">报文历史</div>';
+        this.serverHistory.innerHTML = '<div class="history-title">报文历史</div>';
+        this.dataFlow.classList.remove('active');
         this.updatePhaseNav();
         this.updateUI();
     }
 
     updateUI() {
-        const initialStep = this.phases[1][0];
         this.clientState.textContent = 'CLOSED';
         this.serverState.textContent = 'LISTEN';
-        this.stepDescription.textContent = '点击开始按钮，开始TCP连接建立过程';
-        this.explanationContent.innerHTML = `<p>TCP（传输控制协议）是一种面向连接的、可靠的传输层协议。</p><p>TCP通信分为三个主要阶段：连接建立（三次握手）、数据传输、连接释放（四次挥手）。</p>`;
+        this.stepDescription.textContent = '点击开始，开始TCP通信演示';
+        this.explanationContent.innerHTML = `
+            <div class="tcp-intro">
+                <div class="intro-item">
+                    <div class="intro-icon">🔗</div>
+                    <div class="intro-text">
+                        <strong>面向连接</strong>
+                        <p>通信前必须建立连接</p>
+                    </div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">✅</div>
+                    <div class="intro-text">
+                        <strong>可靠传输</strong>
+                        <p>确认机制、超时重传</p>
+                    </div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">↔️</div>
+                    <div class="intro-text">
+                        <strong>全双工</strong>
+                        <p>双方可同时收发数据</p>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 }
 

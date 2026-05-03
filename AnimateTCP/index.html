@@ -3,71 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCP协议动画演示</title>
+    <title>TCP协议模拟系统</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>TCP通信协议工作原理动画演示</h1>
-            <p>理解三次握手、数据传输和四次挥手</p>
+            <h1>TCP协议模拟系统</h1>
+            <p>深入理解网络通信原理</p>
         </header>
 
         <div class="main-content">
-            <div class="controls">
-                <button id="autoPlayBtn" class="btn btn-primary">自动播放</button>
-                <button id="stepBtn" class="btn">下一步</button>
-                <button id="resetBtn" class="btn btn-reset">重置</button>
-                <div class="speed-control">
-                    <label>速度:</label>
-                    <input type="range" id="speedSlider" min="0.5" max="3" step="0.5" value="1">
-                    <span id="speedValue">1x</span>
-                </div>
-            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-item active">
+                    <div class="nav-icon">📊</div>
+                    <div class="nav-title">总览</div>
+                    <div class="nav-desc">完整TCP通信流程</div>
+                </a>
+                <a href="client.html" class="nav-item">
+                    <div class="nav-icon">💻</div>
+                    <div class="nav-title">客户端</div>
+                    <div class="nav-desc">客户端视角</div>
+                </a>
+                <a href="server.html" class="nav-item">
+                    <div class="nav-icon">🖥️</div>
+                    <div class="nav-title">服务端</div>
+                    <div class="nav-desc">服务端视角</div>
+                </a>
+            </nav>
 
-            <div class="steps-nav">
-                <div class="step-item active" data-step="1">
-                    <span class="step-num">1</span>
-                    <span class="step-title">三次握手</span>
-                </div>
-                <div class="step-item" data-step="2">
-                    <span class="step-num">2</span>
-                    <span class="step-title">数据传输</span>
-                </div>
-                <div class="step-item" data-step="3">
-                    <span class="step-num">3</span>
-                    <span class="step-title">四次挥手</span>
-                </div>
-            </div>
-
-            <div class="animation-area">
-                <div class="network-wrapper">
-                    <div class="client" id="client">
-                        <div class="machine-title">客户端</div>
-                        <div class="state-badge" id="clientState">CLOSED</div>
-                        <div class="packet-queue" id="clientQueue"></div>
+            <div class="overview-section">
+                <h2 class="section-title">完整TCP通信流程</h2>
+                
+                <div class="controls">
+                    <button id="autoPlayBtn" class="btn btn-primary">自动播放</button>
+                    <button id="stepBtn" class="btn">下一步</button>
+                    <button id="resetBtn" class="btn btn-reset">重置</button>
+                    <div class="speed-control">
+                        <label>速度:</label>
+                        <input type="range" id="speedSlider" min="0.5" max="3" step="0.5" value="1">
+                        <span id="speedValue">1x</span>
                     </div>
-                    
-                    <div class="network">
-                        <div class="packets-container" id="packetsContainer"></div>
-                        <div class="step-info" id="stepInfo">
-                            <div class="step-description" id="stepDescription">点击开始按钮，开始TCP连接建立过程</div>
+                </div>
+
+                <div class="steps-nav">
+                    <div class="step-item active" data-step="1">
+                        <span class="step-num">1</span>
+                        <span class="step-title">三次握手</span>
+                    </div>
+                    <div class="step-item" data-step="2">
+                        <span class="step-num">2</span>
+                        <span class="step-title">数据传输</span>
+                    </div>
+                    <div class="step-item" data-step="3">
+                        <span class="step-num">3</span>
+                        <span class="step-title">四次挥手</span>
+                    </div>
+                </div>
+
+                <div class="animation-area">
+                    <div class="network-wrapper">
+                        <div class="machine client-machine" id="client">
+                            <div class="machine-header">
+                                <div class="machine-icon">💻</div>
+                                <div class="machine-info">
+                                    <div class="machine-title">客户端</div>
+                                    <div class="machine-ip">192.168.1.100:54321</div>
+                                </div>
+                            </div>
+                            <div class="state-display">
+                                <div class="state-label">状态</div>
+                                <div class="state-badge" id="clientState">CLOSED</div>
+                            </div>
+                            <div class="packet-history" id="clientHistory">
+                                <div class="history-title">报文历史</div>
+                            </div>
+                        </div>
+                        
+                        <div class="network">
+                            <div class="network-line">
+                                <div class="data-flow" id="dataFlow"></div>
+                            </div>
+                            <div class="packets-container" id="packetsContainer"></div>
+                            <div class="step-info" id="stepInfo">
+                                <div class="step-description" id="stepDescription">点击开始，开始TCP通信演示</div>
+                            </div>
+                        </div>
+                        
+                        <div class="machine server-machine" id="server">
+                            <div class="machine-header">
+                                <div class="machine-icon">🖥️</div>
+                                <div class="machine-info">
+                                    <div class="machine-title">服务器</div>
+                                    <div class="machine-ip">10.0.0.1:8080</div>
+                                </div>
+                            </div>
+                            <div class="state-display">
+                                <div class="state-label">状态</div>
+                                <div class="state-badge" id="serverState">LISTEN</div>
+                            </div>
+                            <div class="packet-history" id="serverHistory">
+                                <div class="history-title">报文历史</div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="server" id="server">
-                        <div class="machine-title">服务器</div>
-                        <div class="state-badge" id="serverState">LISTEN</div>
-                        <div class="packet-queue" id="serverQueue"></div>
-                    </div>
                 </div>
-            </div>
 
-            <div class="explanation">
-                <h3>当前步骤说明</h3>
-                <div class="explanation-content" id="explanationContent">
-                    <p>TCP（传输控制协议）是一种面向连接的、可靠的传输层协议。</p>
-                    <p>TCP通信分为三个主要阶段：连接建立（三次握手）、数据传输、连接释放（四次挥手）。</p>
+                <div class="explanation">
+                    <h3 class="section-title">当前步骤说明</h3>
+                    <div class="explanation-content" id="explanationContent">
+                        <div class="tcp-intro">
+                            <div class="intro-item">
+                                <div class="intro-icon">🔗</div>
+                                <div class="intro-text">
+                                    <strong>面向连接</strong>
+                                    <p>通信前必须建立连接</p>
+                                </div>
+                            </div>
+                            <div class="intro-item">
+                                <div class="intro-icon">✅</div>
+                                <div class="intro-text">
+                                    <strong>可靠传输</strong>
+                                    <p>确认机制、超时重传</p>
+                                </div>
+                            </div>
+                            <div class="intro-item">
+                                <div class="intro-icon">↔️</div>
+                                <div class="intro-text">
+                                    <strong>全双工</strong>
+                                    <p>双方可同时收发数据</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
