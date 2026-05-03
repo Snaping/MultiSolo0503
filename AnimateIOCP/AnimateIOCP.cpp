@@ -1,16 +1,10 @@
-
 #include "pch.h"
-#include "framework.h"
 #include "AnimateIOCP.h"
 #include "AnimateIOCPDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
-CAnimateIOCPApp::CAnimateIOCPApp()
-{
-}
 
 CAnimateIOCPApp theApp;
 
@@ -21,10 +15,10 @@ BOOL CAnimateIOCPApp::InitInstance()
 {
     CWinApp::InitInstance();
 
-    SetRegistryKey(_T("应用程序向导生成的本地应用程序"));
+    SetRegistryKey(_T("Application Wizard Generated Local Application"));
 
     CAnimateIOCPDlg dlg;
-    m_pMainWnd = &amp;dlg;
+    m_pMainWnd = &dlg;
     INT_PTR nResponse = dlg.DoModal();
     if (nResponse == IDOK)
     {

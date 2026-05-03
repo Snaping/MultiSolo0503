@@ -1,6 +1,6 @@
-
 #pragma once
 
+#include "pch.h"
 #include "IOCPServer.h"
 
 enum AnimationState
@@ -29,7 +29,7 @@ struct WorkItem
     int progress;
 };
 
-class CAnimateIOCPDlg : public CDialogEx
+class CAnimateIOCPDlg : public CDialog
 {
 public:
     CAnimateIOCPDlg(CWnd* pParent = nullptr);
@@ -52,38 +52,38 @@ public:
     afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 private:
-    static void IOEventCallback(int clientId, const CString&amp; eventType, const CString&amp; details);
-    void OnIOEvent(int clientId, const CString&amp; eventType, const CString&amp; details);
-    
+    static void IOEventCallback(int clientId, LPCTSTR eventType, LPCTSTR details);
+    void OnIOEvent(int clientId, LPCTSTR eventType, LPCTSTR details);
+
     void InitializeAnimation();
     void DrawAnimation(CDC* pDC);
     void UpdateAnimation();
-    void AddLog(const CString&amp; log);
-    
+    void AddLog(LPCTSTR log);
+
     void SimulateNewClient();
     void SimulateIOEvent();
 
     CIOCPServer m_IOCPServer;
-    
+
     CButton m_btnStart;
     CButton m_btnStop;
     CButton m_btnReset;
     CEdit m_editLog;
     CSliderCtrl m_sliderSpeed;
     CWnd m_staticAnimation;
-    
+
     HICON m_hIcon;
-    
+
     AnimationState m_AnimState;
     int m_nAnimationSpeed;
     UINT_PTR m_nTimer;
-    
-    std::vector&lt;ClientNode&gt; m_Clients;
-    std::vector&lt;WorkItem&gt; m_WorkItems;
-    std::vector&lt;CPoint&gt; m_WorkerPositions;
-    
+
+    std::vector<ClientNode> m_Clients;
+    std::vector<WorkItem> m_WorkItems;
+    std::vector<CPoint> m_WorkerPositions;
+
     CCriticalSection m_LogLock;
-    
+
     int m_nSimulatedClientId;
     int m_nNextClientPos;
 };

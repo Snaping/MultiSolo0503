@@ -1,30 +1,28 @@
-
 #ifndef PCH_H
 #define PCH_H
 
 #ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN            
+#define VC_EXTRALEAN
 #endif
 
-#include "targetver.h"
+#define WINVER 0x0A00
+#define _WIN32_WINNT 0x0A00
 
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS      
+#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
 #define _AFX_ALL_WARNINGS
 
-#include &lt;afxwin.h&gt;         
-#include &lt;afxext.h&gt;         
-#include &lt;afxdisp.h&gt;        
+#include <vector>
+#include <queue>
+#include <algorithm>
+#include <string>
 
-#ifndef _AFX_NO_OLE_SUPPORT
-#include &lt;afxdtctl.h&gt;       
-#endif
-#ifndef _AFX_NO_AFXCMN_SUPPORT
-#include &lt;afxcmn.h&gt;         
-#endif 
-
-#include &lt;winsock2.h&gt;
-#include &lt;mswsock.h&gt;
-#include &lt;ws2tcpip.h&gt;
-#pragma comment(lib, "ws2_32.lib")
+#include <afx.h>
+#include <afxwin.h>
+#include <afxext.h>
+#include <afxdisp.h>
+#include <afxdtctl.h>
+#include <afxcmn.h>
+#include <afxmt.h>
+#include <afxdlgs.h>
 
 #endif

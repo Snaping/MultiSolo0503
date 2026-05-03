@@ -1,121 +1,68 @@
-
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
-  &lt;ItemGroup Label="ProjectConfigurations"&gt;
-    &lt;ProjectConfiguration Include="Debug|x64"&gt;
-      &lt;Configuration&gt;Debug&lt;/Configuration&gt;
-      &lt;Platform&gt;x64&lt;/Platform&gt;
-    &lt;/ProjectConfiguration&gt;
-    &lt;ProjectConfiguration Include="Release|x64"&gt;
-      &lt;Configuration&gt;Release&lt;/Configuration&gt;
-      &lt;Platform&gt;x64&lt;/Platform&gt;
-    &lt;/ProjectConfiguration&gt;
-  &lt;/ItemGroup&gt;
-  &lt;PropertyGroup Label="Globals"&gt;
-    &lt;VCProjectVersion&gt;17.0&lt;/VCProjectVersion&gt;
-    &lt;ProjectGuid&gt;{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}&lt;/ProjectGuid&gt;
-    &lt;RootNamespace&gt;AnimateIOCP&lt;/RootNamespace&gt;
-    &lt;WindowsTargetPlatformVersion&gt;10.0&lt;/WindowsTargetPlatformVersion&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" /&gt;
-  &lt;PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration"&gt;
-    &lt;ConfigurationType&gt;Application&lt;/ConfigurationType&gt;
-    &lt;UseDebugLibraries&gt;true&lt;/UseDebugLibraries&gt;
-    &lt;PlatformToolset&gt;v143&lt;/PlatformToolset&gt;
-    &lt;CharacterSet&gt;Unicode&lt;/CharacterSet&gt;
-    &lt;UseOfMfc&gt;Dynamic&lt;/UseOfMfc&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration"&gt;
-    &lt;ConfigurationType&gt;Application&lt;/ConfigurationType&gt;
-    &lt;UseDebugLibraries&gt;false&lt;/UseDebugLibraries&gt;
-    &lt;PlatformToolset&gt;v143&lt;/PlatformToolset&gt;
-    &lt;WholeProgramOptimization&gt;true&lt;/WholeProgramOptimization&gt;
-    &lt;CharacterSet&gt;Unicode&lt;/CharacterSet&gt;
-    &lt;UseOfMfc&gt;Dynamic&lt;/UseOfMfc&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" /&gt;
-  &lt;ImportGroup Label="ExtensionSettings"&gt;
-  &lt;/ImportGroup&gt;
-  &lt;ImportGroup Label="Shared"&gt;
-  &lt;/ImportGroup&gt;
-  &lt;ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"&gt;
-    &lt;Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" /&gt;
-  &lt;/ImportGroup&gt;
-  &lt;ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'"&gt;
-    &lt;Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" /&gt;
-  &lt;/ImportGroup&gt;
-  &lt;PropertyGroup Label="UserMacros" /&gt;
-  &lt;PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"&gt;
-    &lt;LinkIncremental&gt;true&lt;/LinkIncremental&gt;
-    &lt;OutDir&gt;$(SolutionDir)$(Platform)\$(Configuration)\&lt;/OutDir&gt;
-    &lt;IntDir&gt;$(Platform)\$(Configuration)\&lt;/IntDir&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"&gt;
-    &lt;LinkIncremental&gt;false&lt;/LinkIncremental&gt;
-    &lt;OutDir&gt;$(SolutionDir)$(Platform)\$(Configuration)\&lt;/OutDir&gt;
-    &lt;IntDir&gt;$(Platform)\$(Configuration)\&lt;/IntDir&gt;
-  &lt;/PropertyGroup&gt;
-  &lt;ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"&gt;
-    &lt;ClCompile&gt;
-      &lt;PrecompiledHeader&gt;Use&lt;/PrecompiledHeader&gt;
-      &lt;WarningLevel&gt;Level3&lt;/WarningLevel&gt;
-      &lt;SDLCheck&gt;true&lt;/SDLCheck&gt;
-      &lt;PreprocessorDefinitions&gt;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)&lt;/PreprocessorDefinitions&gt;
-      &lt;ConformanceMode&gt;true&lt;/ConformanceMode&gt;
-      &lt;LanguageStandard&gt;stdcpp17&lt;/LanguageStandard&gt;
-    &lt;/ClCompile&gt;
-    &lt;Link&gt;
-      &lt;SubSystem&gt;Windows&lt;/SubSystem&gt;
-      &lt;GenerateDebugInformation&gt;true&lt;/GenerateDebugInformation&gt;
-    &lt;/Link&gt;
-  &lt;/ItemDefinitionGroup&gt;
-  &lt;ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"&gt;
-    &lt;ClCompile&gt;
-      &lt;PrecompiledHeader&gt;Use&lt;/PrecompiledHeader&gt;
-      &lt;WarningLevel&gt;Level3&lt;/WarningLevel&gt;
-      &lt;FunctionLevelLinking&gt;true&lt;/FunctionLevelLinking&gt;
-      &lt;IntrinsicFunctions&gt;true&lt;/IntrinsicFunctions&gt;
-      &lt;SDLCheck&gt;true&lt;/SDLCheck&gt;
-      &lt;PreprocessorDefinitions&gt;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)&lt;/PreprocessorDefinitions&gt;
-      &lt;ConformanceMode&gt;true&lt;/ConformanceMode&gt;
-      &lt;LanguageStandard&gt;stdcpp17&lt;/LanguageStandard&gt;
-    &lt;/ClCompile&gt;
-    &lt;Link&gt;
-      &lt;SubSystem&gt;Windows&lt;/SubSystem&gt;
-      &lt;EnableCOMDATFolding&gt;true&lt;/EnableCOMDATFolding&gt;
-      &lt;OptimizeReferences&gt;true&lt;/OptimizeReferences&gt;
-      &lt;GenerateDebugInformation&gt;true&lt;/GenerateDebugInformation&gt;
-    &lt;/Link&gt;
-  &lt;/ItemDefinitionGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Text Include="ReadMe.txt" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;ClInclude Include="AnimateIOCP.h" /&gt;
-    &lt;ClInclude Include="AnimateIOCPDlg.h" /&gt;
-    &lt;ClInclude Include="IOCPServer.h" /&gt;
-    &lt;ClInclude Include="resource.h" /&gt;
-    &lt;ClInclude Include="pch.h" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;ClCompile Include="AnimateIOCP.cpp" /&gt;
-    &lt;ClCompile Include="AnimateIOCPDlg.cpp" /&gt;
-    &lt;ClCompile Include="IOCPServer.cpp" /&gt;
-    &lt;ClCompile Include="pch.cpp"&gt;
-      &lt;PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"&gt;Create&lt;/PrecompiledHeader&gt;
-      &lt;PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'"&gt;Create&lt;/PrecompiledHeader&gt;
-    &lt;/ClCompile&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;ResourceCompile Include="AnimateIOCP.rc" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;None Include="res\AnimateIOCP.rc2" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;ItemGroup&gt;
-    &lt;Image Include="res\AnimateIOCP.ico" /&gt;
-  &lt;/ItemGroup&gt;
-  &lt;Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" /&gt;
-  &lt;ImportGroup Label="ExtensionTargets"&gt;
-  &lt;/ImportGroup&gt;
-&lt;/Project&gt;
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <RootNamespace>AnimateIOCP</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings"></ImportGroup>
+  <ImportGroup Label="Shared"></ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimateIOCP.h" />
+    <ClInclude Include="AnimateIOCPDlg.h" />
+    <ClInclude Include="IOCPServer.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AnimateIOCP.cpp" />
+    <ClCompile Include="AnimateIOCPDlg.cpp" />
+    <ClCompile Include="IOCPServer.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AnimateIOCP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets"></ImportGroup>
+</Project>
