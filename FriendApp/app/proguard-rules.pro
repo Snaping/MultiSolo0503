@@ -1,0 +1,3 @@
+-keep class com.arthenica.mobileffmpeg.** { *; }
+-dontwarn com.arthenica.mobileffmpeg.**
+-keep class com.example.motionvideocreator.** { *; }
