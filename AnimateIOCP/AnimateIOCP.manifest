@@ -1,0 +1,23 @@
+
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0"&gt;
+  &lt;assemblyIdentity
+    type="win32"
+    name="Microsoft.Windows.AnimateIOCP"
+    version="1.0.0.0"
+    processorArchitecture="*"&gt;
+  &lt;/assemblyIdentity&gt;
+  &lt;description&gt;AnimateIOCP Application&lt;/description&gt;
+  &lt;dependency&gt;
+    &lt;dependentAssembly&gt;
+      &lt;assemblyIdentity
+        type="win32"
+        name="Microsoft.Windows.Common-Controls"
+        version="6.0.0.0"
+        processorArchitecture="*"
+        publicKeyToken="6595b64144ccf1df"
+        language="*"&gt;
+      &lt;/assemblyIdentity&gt;
+    &lt;/dependentAssembly&gt;
+  &lt;/dependency&gt;
+&lt;/assembly&gt;

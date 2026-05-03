@@ -1,0 +1,142 @@
+
+#include "resource.h"
+#include "afxres.h"
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+/////////////////////////////////////////////////////////////////////////////
+#endif
+
+APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""res\\AnimateIOCP.rc2""\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ANIMATEIOCP_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 380
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 253
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ANIMATEIOCP_DIALOG DIALOGEX 0, 0, 387, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "IOCP工作原理演示"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "启动演示",IDC_BUTTON_START,7,239,80,14
+    PUSHBUTTON      "停止演示",IDC_BUTTON_STOP,93,239,80,14
+    PUSHBUTTON      "重置",IDC_BUTTON_RESET,179,239,80,14
+    GROUPBOX        "日志",IDC_STATIC,7,180,373,53,BS_CENTER
+    EDITTEXT        IDC_EDIT_LOG,15,195,359,33,ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_MULTILINE | ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    GROUPBOX        "IOCP动画演示区",IDC_STATIC,7,7,373,166,BS_CENTER
+    CONTROL         "",IDC_STATIC_ANIMATION,"Static",SS_BLACKRECT,15,22,359,146
+    LTEXT           "动画速度:",IDC_STATIC,273,239,45,8
+    CONTROL         "",IDC_SLIDER_SPEED,"msctls_trackbar32",TBS_AUTOTICKS | TBS_HORZ | WS_TABSTOP,320,239,60,15
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", ""
+            VALUE "FileDescription", "AnimateIOCP Application"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "AnimateIOCP"
+            VALUE "LegalCopyright", "Copyright (C) 2024"
+            VALUE "OriginalFilename", "AnimateIOCP.EXE"
+            VALUE "ProductName", "AnimateIOCP Application"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_ANIMATEIOCP         ICON                    "res\\AnimateIOCP.ico"
+
+IDI_SMALL               ICON                    "res\\AnimateIOCP.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ANIMATEIOCP_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// ADDITIONAL RESOURCES
+//
+
+#include "res\AnimateIOCP.rc2"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
