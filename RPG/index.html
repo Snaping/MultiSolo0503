@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>生化危机 - 生存危机</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="gameContainer">
         <div id="startScreen" class="screen active">
             <div class="start-content">
-                <h1 class="game-title">生化危机</h1>
+                <h1 class="game-title">🧟 生化危机</h1>
                 <p class="subtitle">生存危机</p>
                 <div class="story-text">
                     <p>2026年，浣熊市再次陷入危机...</p>
                     <p>病毒泄露，城市沦为废墟</p>
                     <p>你是最后一名幸存的特种部队成员</p>
                     <p>必须穿越10个危险区域，抵达安全地带</p>
+                </div>
+                <div class="instructions">
+                    <h3>🎮 游戏操作</h3>
+                    <ul>
+                        <li>⬆️⬇️⬅️➡️ 或 WASD - 移动角色</li>
+                        <li>空格键 - 攻击/交互</li>
+                        <li>H键 - 使用医疗包</li>
+                        <li>F键 - 尝试逃跑</li>
+                    </ul>
                 </div>
                 <button id="startBtn" class="game-btn">开始游戏</button>
             </div>
@@ -28,13 +36,21 @@
                 <div class="level-info">
                     <span class="label">关卡</span>
                     <span class="value" id="level">1</span>
+                    <span class="label">/10</span>
                 </div>
                 <div class="health-bar">
-                    <span class="label">生命值</span>
+                    <span class="label">生命</span>
                     <div class="bar-container">
-                        <div class="bar-fill" id="healthBar"></div>
+                        <div class="bar-fill health" id="healthBar"></div>
                     </div>
-                    <span class="value" id="healthValue">100</span>
+                    <span class="value" id="healthValue">100/100</span>
+                </div>
+                <div class="ammo-bar">
+                    <span class="label">弹药</span>
+                    <div class="bar-container">
+                        <div class="bar-fill ammo" id="ammoBar"></div>
+                    </div>
+                    <span class="value" id="ammoValue">30/30</span>
                 </div>
                 <div class="score-info">
                     <span class="label">得分</span>
@@ -44,6 +60,18 @@
 
             <div id="gameCanvas" class="game-canvas">
                 <canvas id="canvas"></canvas>
+                <div id="mapOverlay" class="map-overlay">
+                    <div class="mini-map">
+                        <div class="map-grid" id="mapGrid"></div>
+                        <div class="map-player" id="mapPlayer"></div>
+                        <div class="map-enemies" id="mapEnemies"></div>
+                        <div class="map-exit" id="mapExit"></div>
+                    </div>
+                </div>
+                <div id="gameHUD">
+                    <div id="objective" class="objective">寻找出口 🚩</div>
+                    <div id="enemyAlert" class="enemy-alert"></div>
+                </div>
             </div>
 
             <div class="game-controls">
@@ -65,6 +93,7 @@
                 <div class="level-stats">
                     <p>敌人击杀: <span id="enemiesKilled">0</span></p>
                     <p>得分: <span id="levelScore">0</span></p>
+                    <p>剩余生命: <span id="remainingHealth">100</span></p>
                 </div>
                 <button id="nextLevelBtn" class="game-btn">下一关</button>
             </div>
@@ -72,7 +101,7 @@
 
         <div id="gameOverScreen" class="screen">
             <div class="game-over-content">
-                <h2>游戏结束</h2>
+                <h2>💀 游戏结束</h2>
                 <p>你没能逃离这个被诅咒的城市...</p>
                 <div class="final-stats">
                     <p>最终关卡: <span id="finalLevel">1</span></p>

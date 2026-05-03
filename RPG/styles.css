@@ -4,9 +4,14 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'GameFont';
+    src: local('Arial');
+}
+
 body {
-    font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    font-family: 'GameFont', sans-serif;
+    background: #0a0a0f;
     min-height: 100vh;
     overflow: hidden;
 }
@@ -15,6 +20,7 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
 .screen {
@@ -35,45 +41,75 @@ body {
     color: #fff;
     max-width: 600px;
     padding: 40px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 20px;
     border: 2px solid #ff4757;
-    box-shadow: 0 0 30px rgba(255, 71, 87, 0.3);
+    box-shadow: 0 0 50px rgba(255, 71, 87, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 30px rgba(255, 71, 87, 0.3); }
+    50% { box-shadow: 0 0 60px rgba(255, 71, 87, 0.6); }
 }
 
 .game-title {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #ff4757;
-    text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
+    text-shadow: 0 0 30px rgba(255, 71, 87, 0.9);
     margin-bottom: 10px;
-    animation: pulse 2s infinite;
+    animation: title-pulse 1.5s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { text-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
-    50% { text-shadow: 0 0 40px rgba(255, 71, 87, 1); }
+@keyframes title-pulse {
+    0%, 100% { text-shadow: 0 0 20px rgba(255, 71, 87, 0.8); transform: scale(1); }
+    50% { text-shadow: 0 0 40px rgba(255, 71, 87, 1); transform: scale(1.02); }
 }
 
 .subtitle {
     font-size: 1.5rem;
     color: #ffa502;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .story-text {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     line-height: 1.8;
     color: #ddd;
+    font-size: 1.1rem;
 }
 
 .story-text p {
     margin: 10px 0;
 }
 
+.instructions {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.instructions h3 {
+    color: #ffa502;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.instructions ul {
+    list-style: none;
+    color: #ccc;
+}
+
+.instructions li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .game-btn {
     padding: 15px 50px;
     font-size: 1.3rem;
-    font-family: 'Orbitron', sans-serif;
     background: linear-gradient(135deg, #ff4757, #ffa502);
     border: none;
     border-radius: 30px;
@@ -82,25 +118,29 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
+    font-weight: bold;
 }
 
 .game-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(255, 71, 87, 0.6);
+    box-shadow: 0 0 40px rgba(255, 71, 87, 0.7);
 }
 
 .game-header {
     display: flex;
     justify-content: space-between;
-    padding: 15px 30px;
-    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    padding: 12px 25px;
+    background: rgba(0, 0, 0, 0.75);
     border-bottom: 2px solid #ff4757;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .level-info, .score-info {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    gap: 5px;
 }
 
 .level-info .label, .score-info .label {
@@ -109,114 +149,251 @@ body {
     text-transform: uppercase;
 }
 
-.level-info .value, .score-info .value {
+.level-info .value {
     font-size: 2rem;
     color: #ffa502;
     font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 165, 2, 0.5);
 }
 
-.health-bar {
+.health-bar, .ammo-bar {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
+    min-width: 180px;
 }
 
-.health-bar .label {
+.health-bar .label, .ammo-bar .label {
     font-size: 0.8rem;
     color: #888;
     text-transform: uppercase;
+    width: 40px;
 }
 
 .bar-container {
-    width: 200px;
-    height: 20px;
-    background: #333;
-    border-radius: 10px;
+    flex: 1;
+    height: 18px;
+    background: #222;
+    border-radius: 9px;
     overflow: hidden;
-    border: 1px solid #ff4757;
+    border: 1px solid #333;
 }
 
 .bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #ff4757, #ffa502);
     transition: width 0.3s ease;
 }
 
-.health-bar .value {
-    font-size: 1rem;
-    color: #ff4757;
+.bar-fill.health {
+    background: linear-gradient(90deg, #ff4757, #ff6b81);
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+}
+
+.bar-fill.ammo {
+    background: linear-gradient(90deg, #3498db, #5dade2);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.health-bar .value, .ammo-bar .value {
+    font-size: 0.9rem;
+    color: #fff;
+    width: 60px;
 }
 
 .game-canvas {
     flex: 1;
     position: relative;
-    background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+    background: #0d0d1a;
     overflow: hidden;
+    min-height: 400px;
+    display: block;
 }
 
 #canvas {
     width: 100%;
     height: 100%;
+    display: block;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+}
+
+.mini-map {
+    width: 140px;
+    height: 140px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #2ecc71;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
+}
+
+.map-grid {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 15px 15px;
+}
+
+.map-player {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #3498db;
+    border-radius: 50%;
+    top: 50%;
+    left: 10%;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+    animation: player-pulse 1s ease-in-out infinite;
+}
+
+@keyframes player-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); }
+    50% { box-shadow: 0 0 15px rgba(52, 152, 219, 0.9); }
+}
+
+.map-enemies {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff4757;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 71, 87, 0.8);
+}
+
+.map-exit {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #27ae60;
+    border-radius: 50%;
+    top: 50%;
+    right: 10%;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.8);
+    animation: exit-pulse 2s ease-in-out infinite;
+}
+
+@keyframes exit-pulse {
+    0%, 100% { box-shadow: 0 0 5px rgba(39, 174, 96, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(39, 174, 96, 1); }
+}
+
+#gameHUD {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+}
+
+.objective {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #27ae60;
+    font-weight: bold;
+    border-left: 3px solid #27ae60;
+}
+
+.enemy-alert {
+    margin-top: 10px;
+    background: rgba(255, 71, 87, 0.2);
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #ff4757;
+    font-weight: bold;
+    display: none;
+    animation: alert-blink 0.5s ease-in-out infinite;
+}
+
+@keyframes alert-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
 }
 
 .game-controls {
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.75);
     border-top: 2px solid #ff4757;
 }
 
 .control-btn {
-    padding: 12px 30px;
+    padding: 12px 35px;
     font-size: 1rem;
-    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
     border: none;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.control-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.control-btn:hover::before {
+    left: 100%;
 }
 
 .control-btn.attack {
     background: linear-gradient(135deg, #ff4757, #c0392b);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
 }
 
 .control-btn.heal {
     background: linear-gradient(135deg, #27ae60, #1e8449);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
 }
 
 .control-btn.flee {
     background: linear-gradient(135deg, #3498db, #2980b9);
     color: #fff;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }
 
 .control-btn:hover:not(:disabled) {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
 }
 
 .control-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 .battle-log {
     position: absolute;
-    bottom: 100px;
-    left: 20px;
-    width: 300px;
-    max-height: 150px;
-    background: rgba(0, 0, 0, 0.7);
+    bottom: 80px;
+    left: 15px;
+    width: 280px;
+    max-height: 180px;
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
     overflow-y: auto;
     border: 1px solid #333;
+    backdrop-filter: blur(5px);
 }
 
 .battle-log::-webkit-scrollbar {
@@ -234,42 +411,60 @@ body {
 
 #logContent {
     color: #ddd;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.6;
 }
 
 .log-entry {
-    margin: 5px 0;
+    margin: 6px 0;
     padding-left: 10px;
     border-left: 3px solid #ff4757;
+    animation: log-fade 0.3s ease;
+}
+
+@keyframes log-fade {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 .log-entry.player {
     border-color: #27ae60;
+    color: #7bed9f;
 }
 
 .log-entry.enemy {
     border-color: #e74c3c;
+    color: #ff6b6b;
 }
 
 .log-entry.heal {
     border-color: #3498db;
+    color: #74b9ff;
 }
 
 .log-entry.flag {
     border-color: #f39c12;
+    color: #ffd93d;
     font-weight: bold;
+}
+
+.log-entry.warning {
+    border-color: #e67e22;
+    color: #f5ba7a;
 }
 
 .level-complete-content, .game-over-content, .victory-content {
     text-align: center;
     color: #fff;
     max-width: 500px;
-    padding: 40px;
-    background: rgba(0, 0, 0, 0.8);
+    padding: 45px;
+    background: rgba(0, 0, 0, 0.9);
     border-radius: 20px;
+    box-shadow: 0 0 50px rgba(39, 174, 96, 0.3);
+}
+
+.level-complete-content {
     border: 2px solid #27ae60;
-    box-shadow: 0 0 30px rgba(39, 174, 96, 0.3);
 }
 
 .level-complete-content h2, .victory-content h2 {
@@ -280,56 +475,59 @@ body {
 
 .level-stats, .final-stats, .victory-stats {
     margin: 20px 0;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
 }
 
 .level-stats p, .final-stats p, .victory-stats p {
-    margin: 10px 0;
+    margin: 12px 0;
     font-size: 1.2rem;
+    color: #ccc;
 }
 
 .level-stats span, .final-stats span, .victory-stats span {
     color: #ffa502;
     font-weight: bold;
+    font-size: 1.4rem;
 }
 
 .game-over-content {
-    border-color: #ff4757;
-    box-shadow: 0 0 30px rgba(255, 71, 87, 0.3);
+    border: 2px solid #ff4757;
+    box-shadow: 0 0 50px rgba(255, 71, 87, 0.3);
 }
 
 .game-over-content h2 {
     color: #ff4757;
+    font-size: 2.5rem;
 }
 
 .victory-content {
-    border-color: #f39c12;
-    box-shadow: 0 0 30px rgba(243, 156, 18, 0.5);
+    border: 2px solid #f39c12;
+    box-shadow: 0 0 50px rgba(243, 156, 18, 0.5);
 }
 
 .flag-animation {
     font-size: 6rem;
-    animation: flagWave 1s ease-in-out infinite;
+    animation: flagWave 0.8s ease-in-out infinite;
     margin-bottom: 20px;
 }
 
 @keyframes flagWave {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
 }
 
 .victory-flag {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     margin-bottom: 20px;
 }
 
 .victory-flag .flag {
     font-size: 4rem;
-    animation: flagWave 1s ease-in-out infinite;
+    animation: flagWave 0.8s ease-in-out infinite;
 }
 
 .victory-flag .flag:nth-child(2) {
@@ -342,34 +540,53 @@ body {
 
 @media (max-width: 768px) {
     .game-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .game-header {
         padding: 10px 15px;
+        justify-content: center;
     }
 
-    .level-info .value, .score-info .value {
+    .level-info .value {
         font-size: 1.5rem;
     }
 
+    .health-bar, .ammo-bar {
+        min-width: 140px;
+    }
+
     .bar-container {
-        width: 120px;
+        height: 14px;
     }
 
     .game-controls {
         gap: 10px;
-        padding: 15px;
+        padding: 12px;
     }
 
     .control-btn {
         padding: 10px 20px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .battle-log {
-        width: calc(100% - 40px);
-        left: 20px;
-        bottom: 80px;
+        width: calc(100% - 30px);
+        left: 15px;
+        bottom: 70px;
+    }
+
+    .mini-map {
+        width: 100px;
+        height: 100px;
+    }
+
+    .start-content {
+        margin: 15px;
+        padding: 25px;
+    }
+
+    .instructions li {
+        font-size: 0.9rem;
     }
 }
