@@ -83,11 +83,13 @@ class CodeDocGenerator:
                 if os.path.exists(os.path.join(repo_path, ".git")):
                     self.log("仓库已存在，正在拉取最新代码...")
                     self.git_manager.pull()
+                    self.repo_path = repo_path
                 else:
                     self.log("正在克隆仓库...")
                     self.git_manager.clone(repo_url)
+                    self.repo_path = self.git_manager.repo_path
                 
-                self.repo_path = repo_path
+                self.log(f"仓库路径: {self.repo_path}")
                 self.log("仓库处理完成！")
                 messagebox.showinfo("成功", "仓库克隆/拉取成功！")
             except Exception as e:
@@ -99,8 +101,7 @@ class CodeDocGenerator:
         threading.Thread(target=run, daemon=True).start()
     
     def analyze_code(self):
-        repo_path = self.repo_path_entry.get().strip()
-        if not repo_path or not os.path.exists(repo_path):
+        if not self.repo_path or not os.path.exists(self.repo_path):
             messagebox.showerror("错误", "请先克隆/拉取仓库")
             return
         
@@ -108,7 +109,7 @@ class CodeDocGenerator:
             try:
                 self.progress.start()
                 self.log("开始分析代码结构...")
-                self.analyzer = CodeAnalyzer(repo_path)
+                self.analyzer = CodeAnalyzer(self.repo_path)
                 self.analyzer.analyze()
                 self.log("代码分析完成！")
                 self.log(f"发现 {len(self.analyzer.modules)} 个模块")
