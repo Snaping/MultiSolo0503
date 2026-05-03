@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢乐农场</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        #game-container {
+            width: 100vw;
+            height: 100vh;
+        }
+        #ui-overlay {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+        #user-info {
+            background: rgba(0,0,0,0.5);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        #user-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4ade80;
+        }
+        #user-coins {
+            font-size: 20px;
+            color: #fbbf24;
+        }
+        #controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        .plant-btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 80px;
+        }
+        .plant-btn:hover {
+            transform: scale(1.1);
+        }
+        .plant-btn.selected {
+            outline: 3px solid white;
+            transform: scale(1.1);
+        }
+        .plant-btn .price {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        .plant-btn .value {
+            font-size: 10px;
+            color: #fbbf24;
+        }
+        .plant-carrot { background: #fb923c; color: white; }
+        .plant-tomato { background: #ef4444; color: white; }
+        .plant-corn { background: #facc15; color: #333; }
+        .plant-watermelon { background: #22c55e; color: white; }
+        .plant-sunflower { background: #eab308; color: #333; }
+        .plant-eggplant { background: #8b5cf6; color: white; }
+        #harvest-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #harvest-btn:hover {
+            transform: scale(1.1);
+        }
+        #harvest-btn.active {
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+        }
+        #instructions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.6);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            z-index: 100;
+        }
+        #notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 24px;
+            z-index: 200;
+            display: none;
+            text-align: center;
+        }
+        #notification .coins {
+            color: #fbbf24;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: white;
+        }
+        #loading h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        #loading p {
+            font-size: 24px;
+            color: #4ade80;
+        }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <h1>🌾 欢乐农场 🌾</h1>
+        <p>正在加载...</p>
+    </div>
+    <div id="game-container"></div>
+    <div id="ui-overlay">
+        <div id="user-info">
+            <div id="user-name">玩家</div>
+            <div id="user-coins">💰 金币: 100</div>
+        </div>
+    </div>
+    <div id="instructions">
+        <p>🎮 WASD / 方向键 - 移动</p>
+        <p>🌱 点击按钮选择种子</p>
+        <p>⬛ 点击土地播种</p>
+        <p>🧺 走到成熟作物旁自动采摘</p>
+    </div>
+    <div id="controls">
+        <button class="plant-btn plant-carrot" data-plant="carrot" data-price="10" data-value="25">
+            🥕 胡萝卜
+            <span class="price">💰 10</span>
+            <span class="value">收益 25</span>
+        </button>
+        <button class="plant-btn plant-tomato" data-plant="tomato" data-price="15" data-value="40">
+            🍅 番茄
+            <span class="price">💰 15</span>
+            <span class="value">收益 40</span>
+        </button>
+        <button class="plant-btn plant-corn" data-plant="corn" data-price="20" data-value="55">
+            🌽 玉米
+            <span class="price">💰 20</span>
+            <span class="value">收益 55</span>
+        </button>
+        <button class="plant-btn plant-watermelon" data-plant="watermelon" data-price="30" data-value="80">
+            🍉 西瓜
+            <span class="price">💰 30</span>
+            <span class="value">收益 80</span>
+        </button>
+        <button class="plant-btn plant-sunflower" data-plant="sunflower" data-price="25" data-value="65">
+            🌻 向日葵
+            <span class="price">💰 25</span>
+            <span class="value">收益 65</span>
+        </button>
+        <button class="plant-btn plant-eggplant" data-plant="eggplant" data-price="35" data-value="95">
+            🍆 茄子
+            <span class="price">💰 35</span>
+            <span class="value">收益 95</span>
+        </button>
+        <button id="harvest-btn">🧺 采摘</button>
+    </div>
+    <div id="notification">
+        <div id="notification-text"></div>
+        <div class="coins" id="notification-coins"></div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
