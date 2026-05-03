@@ -6,6 +6,43 @@ body {
   display: none !important;
 }
 
+/* 加载动画样式 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 255, 255, 0.2);
+  border-top: 4px solid #00ffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20px;
+  color: #00ffff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .toolbar {
   position: absolute;
   top: 10px;
@@ -146,4 +183,66 @@ body {
 .route-info p {
   margin: 5px 0;
   font-size: 13px;
+}
+
+/* 导航面板样式 */
+.navigation-panel {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: rgba(0, 20, 40, 0.95);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  border: 2px solid #00ffff;
+  min-width: 350px;
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.2);
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.nav-header h3 {
+  margin: 0;
+  color: #00ffff;
+  font-size: 18px;
+}
+
+.nav-progress {
+  margin: 15px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(0, 100, 150, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffff, #00ccff, #0099ff);
+  border-radius: 6px;
+  transition: width 0.1s linear;
+}
+
+.nav-info {
+  text-align: center;
+}
+
+.nav-info p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #88ddff;
+}
+
+.nav-info strong {
+  color: #00ffff;
 }
