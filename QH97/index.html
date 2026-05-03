@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拳皇97 - 角色闯关版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+        
+        #gameContainer {
+            position: relative;
+            border: 4px solid #ff6b35;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+        }
+        
+        #gameCanvas {
+            display: block;
+            background: #000;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+        
+        .health-bar {
+            width: 300px;
+            height: 25px;
+            background: #333;
+            border: 3px solid #fff;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(180deg, #00ff00 0%, #88ff00 50%, #00aa00 100%);
+            transition: width 0.3s;
+        }
+        
+        .health-fill.low {
+            background: linear-gradient(180deg, #ff0000 0%, #ff4400 50%, #aa0000 100%);
+        }
+        
+        .health-fill.medium {
+            background: linear-gradient(180deg, #ffff00 0%, #ffaa00 50%, #aaaa00 100%);
+        }
+        
+        #playerHealth {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        #enemyHealth {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .bar-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            z-index: 1;
+        }
+        
+        #playerHealth .bar-label {
+            left: 10px;
+        }
+        
+        #enemyHealth .bar-label {
+            right: 10px;
+        }
+        
+        #score {
+            position: absolute;
+            top: 45px;
+            left: 10px;
+            font-size: 18px;
+        }
+        
+        #level {
+            position: absolute;
+            top: 45px;
+            right: 10px;
+            font-size: 18px;
+        }
+        
+        #gameOver, #startScreen, #levelComplete {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            background: rgba(0,0,0,0.9);
+            padding: 40px;
+            border: 3px solid #ff6b35;
+            display: none;
+            pointer-events: auto;
+        }
+        
+        #startScreen {
+            display: block;
+        }
+        
+        h1 {
+            font-size: 48px;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px #000;
+        }
+        
+        button {
+            padding: 15px 40px;
+            font-size: 20px;
+            background: linear-gradient(180deg, #ff6b35 0%, #cc4400 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.1);
+        }
+        
+        .controls {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .controls p {
+            margin: 5px 0;
+        }
+        
+        .combo-display {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 36px;
+            color: #ffff00;
+            text-shadow: 2px 2px 4px #000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="960" height="540"></canvas>
+        <div id="ui">
+            <div id="playerHealth">
+                <div class="health-bar">
+                    <div class="bar-label">草薙京</div>
+                    <div id="playerHealthFill" class="health-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div id="enemyHealth">
+                <div class="health-bar">
+                    <div class="bar-label">敌人</div>
+                    <div id="enemyHealthFill" class="health-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div id="score">分数: 0</div>
+            <div id="level">关卡: 1</div>
+            <div id="comboDisplay" class="combo-display"></div>
+        </div>
+        <div id="startScreen">
+            <h1>拳皇97 - 闯关版</h1>
+            <p style="font-size: 18px; margin-bottom: 10px;">击败所有敌人，成为拳皇！</p>
+            <div class="controls">
+                <p><strong>操作说明：</strong></p>
+                <p>A/D 或 ←/→ - 移动</p>
+                <p>W 或 ↑ - 跳跃</p>
+                <p>J - 轻拳</p>
+                <p>K - 重拳</p>
+                <p>L - 特殊技</p>
+                <p>空格 - 必杀技</p>
+            </div>
+            <button onclick="startGame()">开始游戏</button>
+        </div>
+        <div id="gameOver">
+            <h1 style="color: #ff0000;">游戏结束</h1>
+            <p style="font-size: 24px;" id="finalScore">分数: 0</p>
+            <button onclick="restartGame()">重新开始</button>
+        </div>
+        <div id="levelComplete">
+            <h1 style="color: #00ff00;">关卡完成！</h1>
+            <p style="font-size: 24px;" id="levelScore"></p>
+            <button onclick="nextLevel()">下一关</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
