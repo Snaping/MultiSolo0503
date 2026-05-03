@@ -1,0 +1,19 @@
+[project]
+name = "quant_recommendation_tool"
+version = "1.0.0"
+description = "开源量化交易平台 - 股票、基金、期货推荐工具"
+authors = ["Developer <developer@example.com>"]
+requires-python = ">=3.9"
+dependencies = [
+    "vnpy>=2.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.2.0",
+    "ta>=0.10.0",
+    "yfinance>=0.2.0",
+    "requests>=2.31.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
