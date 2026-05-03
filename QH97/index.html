@@ -161,17 +161,31 @@
         }
         
         .combo-display {
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 36px;
-            color: #ffff00;
-            text-shadow: 2px 2px 4px #000;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-    </style>
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 36px;
+        color: #ffff00;
+        text-shadow: 2px 2px 4px #000;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .controls-display {
+        position: absolute;
+        top: 70px;
+        right: 10px;
+        color: #ffffff;
+        font-size: 13px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 8px 12px;
+        border-radius: 5px;
+        border: 1px solid #ff6b35;
+        line-height: 1.6;
+        text-align: right;
+    }
+</style>
 </head>
 <body>
     <div id="gameContainer">
@@ -190,8 +204,13 @@
                 </div>
             </div>
             <div id="score">分数: 0</div>
-            <div id="level">关卡: 1</div>
-            <div id="comboDisplay" class="combo-display"></div>
+    <div id="level">关卡: 1</div>
+    <div id="comboDisplay" class="combo-display"></div>
+    <div id="controlsDisplay" class="controls-display">
+        <div>A/D - 移动 | W - 跳跃</div>
+        <div>J - 轻拳 | K - 重拳</div>
+        <div>L - 特殊技 | 空格 - 必杀</div>
+    </div>
         </div>
         <div id="startScreen">
             <h1>拳皇97 - 闯关版</h1>
