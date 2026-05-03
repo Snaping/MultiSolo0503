@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生化危机 - 生存危机</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="startScreen" class="screen active">
+            <div class="start-content">
+                <h1 class="game-title">生化危机</h1>
+                <p class="subtitle">生存危机</p>
+                <div class="story-text">
+                    <p>2026年，浣熊市再次陷入危机...</p>
+                    <p>病毒泄露，城市沦为废墟</p>
+                    <p>你是最后一名幸存的特种部队成员</p>
+                    <p>必须穿越10个危险区域，抵达安全地带</p>
+                </div>
+                <button id="startBtn" class="game-btn">开始游戏</button>
+            </div>
+        </div>
+
+        <div id="gameScreen" class="screen">
+            <div class="game-header">
+                <div class="level-info">
+                    <span class="label">关卡</span>
+                    <span class="value" id="level">1</span>
+                </div>
+                <div class="health-bar">
+                    <span class="label">生命值</span>
+                    <div class="bar-container">
+                        <div class="bar-fill" id="healthBar"></div>
+                    </div>
+                    <span class="value" id="healthValue">100</span>
+                </div>
+                <div class="score-info">
+                    <span class="label">得分</span>
+                    <span class="value" id="score">0</span>
+                </div>
+            </div>
+
+            <div id="gameCanvas" class="game-canvas">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="game-controls">
+                <button id="attackBtn" class="control-btn attack">⚔️ 攻击</button>
+                <button id="healBtn" class="control-btn heal">💊 治疗</button>
+                <button id="fleeBtn" class="control-btn flee">🏃 逃跑</button>
+            </div>
+
+            <div id="battleLog" class="battle-log">
+                <div id="logContent"></div>
+            </div>
+        </div>
+
+        <div id="levelCompleteScreen" class="screen">
+            <div class="level-complete-content">
+                <div class="flag-animation">🚩</div>
+                <h2>关卡完成!</h2>
+                <p>你成功穿越了这片危险区域</p>
+                <div class="level-stats">
+                    <p>敌人击杀: <span id="enemiesKilled">0</span></p>
+                    <p>得分: <span id="levelScore">0</span></p>
+                </div>
+                <button id="nextLevelBtn" class="game-btn">下一关</button>
+            </div>
+        </div>
+
+        <div id="gameOverScreen" class="screen">
+            <div class="game-over-content">
+                <h2>游戏结束</h2>
+                <p>你没能逃离这个被诅咒的城市...</p>
+                <div class="final-stats">
+                    <p>最终关卡: <span id="finalLevel">1</span></p>
+                    <p>总得分: <span id="finalScore">0</span></p>
+                    <p>敌人击杀: <span id="totalKills">0</span></p>
+                </div>
+                <button id="restartBtn" class="game-btn">重新开始</button>
+            </div>
+        </div>
+
+        <div id="victoryScreen" class="screen">
+            <div class="victory-content">
+                <div class="victory-flag">
+                    <span class="flag">🚩</span>
+                    <span class="flag">🚩</span>
+                    <span class="flag">🚩</span>
+                </div>
+                <h2>🎉 胜利! 🎉</h2>
+                <p>你成功逃离了浣熊市!</p>
+                <p>你是真正的生存大师!</p>
+                <div class="victory-stats">
+                    <p>总得分: <span id="victoryScore">0</span></p>
+                    <p>敌人击杀: <span id="victoryKills">0</span></p>
+                    <p>剩余生命: <span id="victoryHealth">0</span></p>
+                </div>
+                <button id="playAgainBtn" class="game-btn">再玩一次</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
