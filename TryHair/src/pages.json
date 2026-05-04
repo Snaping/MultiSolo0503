@@ -1,0 +1,51 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "发型试戴",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/gallery/gallery",
+      "style": {
+        "navigationBarTitleText": "发型库",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/result/result",
+      "style": {
+        "navigationBarTitleText": "试戴效果",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "发型试戴",
+    "navigationBarBackgroundColor": "#1a1a2e",
+    "backgroundColor": "#1a1a2e"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#6c5ce7",
+    "backgroundColor": "#1a1a2e",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "拍照",
+        "iconPath": "static/icons/camera.png",
+        "selectedIconPath": "static/icons/camera-active.png"
+      },
+      {
+        "pagePath": "pages/gallery/gallery",
+        "text": "发型库",
+        "iconPath": "static/icons/gallery.png",
+        "selectedIconPath": "static/icons/gallery-active.png"
+      }
+    ]
+  }
+}

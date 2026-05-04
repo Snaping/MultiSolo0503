@@ -1,0 +1,12 @@
+{
+  "db_enabled": false,
+  "db_type": "sqlite",
+  "sqlite_db": "D:\\WorkSpace\\Agent\\MultiSoloSpace\\MultiSolo0503\\pTB\\data\\taobao_spider.db",
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "database": "taobao_spider"
+  }
+}

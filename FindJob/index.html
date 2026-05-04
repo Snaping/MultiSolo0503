@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端面试系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>InterviewPro</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#home" onclick="navigate('home'); return false;">
+                    <i class="fas fa-home"></i> 首页
+                </a>
+                <a href="#javascript" onclick="navigate('javascript'); return false;">
+                    <i class="fab fa-js-square"></i> JavaScript
+                </a>
+                <a href="#java" onclick="navigate('java'); return false;">
+                    <i class="fab fa-java"></i> Java
+                </a>
+                <a href="#python" onclick="navigate('python'); return false;">
+                    <i class="fab fa-python"></i> Python
+                </a>
+                <a href="#go" onclick="navigate('go'); return false;">
+                    <i class="fab fa-golang"></i> Go
+                </a>
+            </nav>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索知识点..." id="searchInput">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-container">
+        <!-- 内容将由JavaScript动态渲染 -->
+    </main>
+
+    <!-- Modal -->
+    <div id="topic-modal" class="modal">
+        <div class="modal-content">
+            <!-- 动态内容 -->
+        </div>
+    </div>
+
+    <!-- Animation Modal -->
+    <div id="animation-modal" class="modal">
+        <div class="modal-content demo-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-play-circle"></i> 原理动画演示</h2>
+                <button onclick="closeModal()" class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="demo-container">
+                <!-- 动画内容 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 预加载数据脚本 -->
+    <script src="data/javascript-data.js"></script>
+    <script src="data/java-data.js"></script>
+    <script src="data/python-data.js"></script>
+    <script src="data/go-data.js"></script>
+    <script src="data/database-data.js"></script>
+    <script src="data/algorithm-data.js"></script>
+    <script src="data/design-data.js"></script>
+
+    <!-- Prism 代码高亮 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

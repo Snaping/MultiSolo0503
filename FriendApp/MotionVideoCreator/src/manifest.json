@@ -31,7 +31,10 @@
                 "idfa" : false,
                 "dSYMs" : false
             },
-            "sdkConfigs" : {}
+            "sdkConfigs" : {},
+            "splashscreen" : {
+                "useOriginalMsgbox" : true
+            }
         }
     },
     "quickapp" : {},

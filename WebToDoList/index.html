@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>待办事项</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>待办事项</h1>
+        <div class="input-container">
+            <input type="text" id="todoInput" placeholder="添加新的待办事项...">
+            <button id="addBtn">添加</button>
+        </div>
+        <div class="toolbar">
+            <label class="image-upload">
+                <input type="file" id="imageInput" accept="image/*" multiple>
+                <span>📷 添加图片</span>
+            </label>
+            <button id="exportBtn">📥 导出Markdown</button>
+        </div>
+        <ul id="todoList"></ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
